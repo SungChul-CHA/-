@@ -70,6 +70,18 @@ def calculate_years_to_target(annual, target_money):
         annual += int(annual * annual_increase_rate)
 
     return year
+    
+def calculate_future_salary(starting_salary, years, raise_rate):
+    future_salary = starting_salary
+    for _ in range(years):
+        future_salary += future_salary * (raise_rate / 100)
+    print(f"{years}년 후 연봉: {future_salary:.2f}원")
+    return future_salary
+
+def calculate_required_raise_rate(starting_salary, target_salary, years):
+    raise_rate = ((target_salary / starting_salary) ** (1 / years) - 1) * 100
+    print(f"{years}년 후 목표 연봉을 달성하기 위한 연간 임금 상승률: {raise_rate:.2f}%")
+    return raise_rate
 
 # 테스트 코드
 target_money = 1_000_000_000
@@ -90,3 +102,6 @@ print(year, "년 투자 결과: ", see_better(result))
 seed = 2_000_000
 result = invest(seed, 5)
 print("2,000,000원을 5년간 투자한 결과: ", see_better(result))
+
+calculate_future_salary(45000000, 10, 6)  # 초봉 4500만원, 10년, 연간 임금 상승률 6%
+calculate_required_raise_rate(50000000, 100000000, 10)  # 초봉 5000만원, 목표 연봉 1억원, 10년
